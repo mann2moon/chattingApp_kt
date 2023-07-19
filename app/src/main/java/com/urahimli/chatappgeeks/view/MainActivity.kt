@@ -36,30 +36,17 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        /*
-//UserAdapterdan gonderidiyimiz melumatlari burada aliriq
-        val name = intent.getStringExtra("name")
-        val receiverUid = intent.getStringExtra("uid")
-        //ustdeki toolbar
-        supportActionBar?.title = "You are $name"
-
-         */
-        supportActionBar?.title = "WhatsHappen"
+        supportActionBar?.title = "Chats"
 
 
-
-
-        //initialize db
         mAuth = Firebase.auth
         mDbRef = FirebaseDatabase.getInstance().getReference()
 
-        //initialize recyclerView
         userList = ArrayList()
         adapter = UserAdapter(this, userList)
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
         binding.recyclerView.adapter = adapter
 
-        //database'in icindekini RealtimeDatabase'den gostermek
         mDbRef.child("user").addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
 
@@ -68,7 +55,6 @@ class MainActivity : AppCompatActivity() {
                 for (postSnapshot in snapshot.children) {
                     val currentUser = postSnapshot.getValue(User::class.java)
 
-                    //ozun ozunle catlasmayasan deye
                     if (mAuth.currentUser?.uid != currentUser?.uid) {
                         userList.add(currentUser!!)
                     }
@@ -81,10 +67,8 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
-
     }
 
-    //Menu
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater: MenuInflater = menuInflater
         inflater.inflate(R.menu.menu, menu)
