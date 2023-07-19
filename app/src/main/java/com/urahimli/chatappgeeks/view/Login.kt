@@ -21,13 +21,10 @@ class Login : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        //ActionBar gizleme
         supportActionBar?.hide()
 
-        //Firebase initialize
         mAuth = Firebase.auth
 
-        //1 defe giribse her defe parol istemir
         val currentUser = mAuth.currentUser
         if (currentUser != null) {
             val intent = Intent(this@Login, MainActivity::class.java)
@@ -38,8 +35,6 @@ class Login : AppCompatActivity() {
 
     }
 
-
-
     fun signUpClicked (view: View) {
         val intent = Intent(this, SignUp::class.java)
         startActivity(intent)
@@ -49,10 +44,9 @@ class Login : AppCompatActivity() {
         val email = binding.edtEmail.text.toString()
         val password = binding.edtPassword.text.toString()
 
-        login(email, password)    //ozumuz login methodunda yaziriq Firebase'i
+        login(email, password)    
     }
 
-    //Login current user via Firebase
     private fun login(email: String, password: String) {
 
         if (email.isNotEmpty() && password.isNotEmpty()) {
@@ -71,8 +65,5 @@ class Login : AppCompatActivity() {
                     Toast.makeText(applicationContext,exception.localizedMessage,Toast.LENGTH_LONG).show()
             }
         }
-
-
     }
-
 }
