@@ -10,7 +10,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.urahimli.chatappgeeks.R
 import com.urahimli.chatappgeeks.model.Message
 
-//2 ViewHolder biri sent, digeri receive ucun
 
 class MessageAdapter(val context: Context, val messageList: ArrayList<Message>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -32,7 +31,6 @@ class MessageAdapter(val context: Context, val messageList: ArrayList<Message>) 
     }
 
 
-    //ozumuz yaratdiq ki receive sent oldugunu bilek
     override fun getItemViewType(position: Int): Int {
         val currentMessage = messageList[position]
 
@@ -44,7 +42,6 @@ class MessageAdapter(val context: Context, val messageList: ArrayList<Message>) 
             return ITEM_RECEIVE
         }
     }
-    ///////
 
     override fun getItemCount(): Int {
         return messageList.size
@@ -56,12 +53,11 @@ class MessageAdapter(val context: Context, val messageList: ArrayList<Message>) 
 
         if (holder.javaClass == SentViewHolder::class.java) {
             //message sending part
-            val viewHolder = holder as SentViewHolder    //typeCasting
+            val viewHolder = holder as SentViewHolder    
             holder.sentMessage.text = currentMessage.message
 
         } else {
-            //message receive part
-            val viewHolder = holder as ReceiveViewHolder    //typeCasting
+            val viewHolder = holder as ReceiveViewHolder    
             holder.receiveMessage.text = currentMessage.message
 
         }
