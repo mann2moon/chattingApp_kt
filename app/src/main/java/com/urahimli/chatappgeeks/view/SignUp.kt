@@ -25,10 +25,8 @@ class SignUp : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        //ActionBar gizleme
         supportActionBar?.hide()
 
-        //Firebase initialize
         mAuth = Firebase.auth
 
     }
@@ -39,10 +37,9 @@ class SignUp : AppCompatActivity() {
         val email = binding.edtEmail.text.toString()
         val password = binding.edtPassword.text.toString()
 
-        signUp(name, email, password)   //ozumuz signUp methodunda yaziriq Firebase'i
+        signUp(name, email, password)   
     }
 
-    //Create new user via Firebase
     private fun signUp(name: String, email: String, password: String) {
 
         if (email.isNotEmpty() && password.isNotEmpty() && name.isNotEmpty()) {
@@ -50,7 +47,6 @@ class SignUp : AppCompatActivity() {
                 .addOnCompleteListener { task ->
 
                 if (task.isSuccessful) {
-                    //add user to database with this our method
                     addUserToDatabase(name, email, mAuth.currentUser?.uid!!)
 
                     Toast.makeText(applicationContext,"You successfully created your account",Toast.LENGTH_LONG).show()
@@ -69,7 +65,6 @@ class SignUp : AppCompatActivity() {
     }
 
     private fun addUserToDatabase(name: String, email: String, uid: String) {
-        //adding users via Realtime Database
         mDbRef = FirebaseDatabase.getInstance().getReference()
 
         mDbRef.child("user").child(uid).setValue(User(name, email, uid))
