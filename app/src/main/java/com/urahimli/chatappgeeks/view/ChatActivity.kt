@@ -11,9 +11,6 @@ import com.urahimli.chatappgeeks.adapter.MessageAdapter
 import com.urahimli.chatappgeeks.databinding.ActivityChatBinding
 
 class ChatActivity : AppCompatActivity() {
-    /*
-    * sekil qoymaq funksiyasi getir
-    * */
 
     private lateinit var binding: ActivityChatBinding
 
@@ -31,11 +28,9 @@ class ChatActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        //UserAdapterdan gonderidiyimiz melumatlari burada aliriq
         val name = intent.getStringExtra("name")
         val receiverUid = intent.getStringExtra("uid")
 
-        //mesaj gonderme alma logici
         val senderUid = FirebaseAuth.getInstance().currentUser?.uid
 
         mDbRef = FirebaseDatabase.getInstance().getReference()
@@ -44,18 +39,14 @@ class ChatActivity : AppCompatActivity() {
         receiverRoom = senderUid + receiverUid
 
 
-
-        //yuxari toolbar'da adin gorsenmesi
         supportActionBar?.title = name
 
-        //initialize adapter
         messageList = ArrayList()
         messageAdapter = MessageAdapter(this, messageList)
         binding.chatRecyclerView.layoutManager = LinearLayoutManager(this)
         binding.chatRecyclerView.adapter = messageAdapter
 
 
-        //showing message on recyclerview
         mDbRef.child("chats").child(senderRoom!!).child("messages")
             .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
@@ -78,19 +69,15 @@ class ChatActivity : AppCompatActivity() {
             })
 
 
-
-        //send button clicked
         binding.sendButton.setOnClickListener {
             val message = binding.messageBox.text.toString()
             val messageObject = Message(message, senderUid)
 
             if (!message.equals("") && !messageObject.equals("")) {
-                //sender room ucun
                 mDbRef.child("chats").child(senderRoom!!).child("messages")
                     .push()
                     .setValue(messageObject)
                     .addOnSuccessListener {
-                        //receiver room ucun
                         mDbRef.child("chats").child(receiverRoom!!).child("messages")
                             .push()
                             .setValue(messageObject)
@@ -104,6 +91,5 @@ class ChatActivity : AppCompatActivity() {
         }
 
     }
-
 
 }
