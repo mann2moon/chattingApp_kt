@@ -1,1 +1,39 @@
-.
+{
+  "project_info": {
+    "project_number": "192183035676",
+    "project_id": "chatappgfg",
+    "storage_bucket": "chatappgfg.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:192183035676:android:fbbd514ab34606da017cd9",
+        "android_client_info": {
+          "package_name": "com.urahimli.chatappgeeks"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "192183035676-csf1v5bv1i9o3du2ededf1kbh9hat3g7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAG4ysHdGe1arV0i9JGZiNcPLhk-CmBtWs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "192183035676-csf1v5bv1i9o3du2ededf1kbh9hat3g7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
